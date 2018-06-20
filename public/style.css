@@ -1,0 +1,32 @@
+h1 {
+    text-align: center;
+}
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px;
+    background: #d0ded9;
+    margin: 10px;
+    border: 2px solid #989797;
+    border-radius: 5px;
+}
+
+.item-button {
+    background: #c7c7a7;
+    padding: 5px 15px;
+    font-weight: 800;
+    color: #232222;
+    border: 2px solid #000;
+    border-radius: 5px;
+}
+
+.load-more {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-weight: 800;
+    color: #232222;
+    border: 2px solid #000;
+    border-radius: 5px;
+}
