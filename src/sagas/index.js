@@ -1,20 +1,15 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import axios from 'axios';
+import { fetchArticlesApi, fetchAllArticlesApi} from '../api/index';
 
 import {
     ARTICLE_FETCH_SUCCEEDED,
     ARTICLE_FETCH_FAILED,
-    ARTICLE_FETCH_REQUEST
+    ARTICLE_FETCH_REQUEST,
+    GET_ALL_ARTICLES_SUCCEEDED,
+    GET_ALL_ARTICLES_FAILED,
+    GET_ALL_ARTICLES
 } from '../actions/actionTypes';
 
-
-const fetchArticlesApi = (limit) => {
-    const request = axios.get(`http://localhost:3004/articles?_limit=${3}&_start=${limit}`)
-	.then(res => {
-		return res.data
-    })
-    return request;
-}
 
 function* fetchArticles(action) {
    try {
@@ -25,9 +20,18 @@ function* fetchArticles(action) {
    }
 }
 
+function* fetchAllArticles(action) {
+  try {
+     const article = yield call(fetchAllArticlesApi, action.payload);
+     yield put({type: GET_ALL_ARTICLES_SUCCEEDED, payload: article});
+  } catch (e) {
+     yield put({type: GET_ALL_ARTICLES_FAILED, payload: e.message});
+  }
+}
 
 function* mySaga() {
   yield takeEvery(ARTICLE_FETCH_REQUEST, fetchArticles);
+  yield takeEvery(GET_ALL_ARTICLES, fetchAllArticles);
 }
 
 
